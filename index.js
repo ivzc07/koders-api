@@ -12,6 +12,6 @@ db.connect()
         } )
     })
     .catch((error) => {
-        console.error("DB connection erro",error);
+        console.error("DB connection error",error);
     })
 

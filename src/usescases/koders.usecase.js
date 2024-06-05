@@ -1,8 +1,21 @@
 const Koders = require('../models/koders.model')
-
+const createError = require('http-errors');
+const encrypt = require('../lib/encrypt');
 async function create(koderData) {
-   const newKoder =  await Koders.create(koderData)
-   return newKoder; 
+
+    const koderFound = await Koders.findOne({ email: koderData.email});
+
+    if(koderFound){
+       // throw new Error("Email already in use");
+       throw createError(409, 'Emial already in use');
+    }
+    const password = await encrypt.encrypt(koderData.password);
+
+    koderData.password = password;
+    
+    const newKoder =  await Koders.create(koderData)
+
+    return newKoder; 
 }
 
 async function getAll() {
