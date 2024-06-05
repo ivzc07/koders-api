@@ -11,7 +11,7 @@ const router = express.Router();
     updateById
 
 */
-router.get('/', auth, async (request, response) => {
+router.get('/', async (request, response) => {
     try{
         const generations = await generationsUseCase.getAll();
         response.json({
