@@ -56,7 +56,7 @@ router.post('/', async (request, response) => {
             data : {addedGeneration},
         })
     }catch (error){
-        error.status (error.status || 500);
+        response.status (error.status || 500);
         response.json({
             success: false,
             error: error.message,
